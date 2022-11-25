@@ -1,9 +1,5 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { keyframes } from "styled-components";
-import { useQuery } from "react-query";
-import { fetchChampionName } from "./api";
 const Container = styled.div`
   border-radius: 8px;
   max-width: 540px;
@@ -140,31 +136,6 @@ export default function Champion() {
   const [count, setCount] = useState(0);
   const [championsDictionary, setChampionsDictionary] = useState({});
 
-  // const { data: champion, refetch } = useQuery(
-  //   "allChampions",
-  //   fetchChampionName,
-  //   {
-  //     onSuccess: (data) => {
-  //       // 성공시 호출
-  //       for (const key in data.data) {
-  //         champions.push([
-  //           data.data[key].name,
-  //           `http://ddragon.leagueoflegends.com/cdn/12.22.1/img/champion/${[
-  //             key,
-  //           ]}.png`,
-  //         ]);
-  //       }
-  //       console.log(champions);
-  //       shuffle(champions);
-  //     },
-  //     onError: (e) => {
-  //       // 실패시 호출 (401, 404 같은 error가 아니라 정말 api 호출이 실패한 경우만 호출됩니다.)
-  //       // 강제로 에러 발생시키려면 api단에서 throw Error 날립니다. (참조: https://react-query.tanstack.com/guides/query-functions#usage-with-fetch-and-other-clients-that-do-not-throw-by-default)
-  //       console.log(e.message);
-  //     },
-  //   }
-  // );
-
   useEffect(() => {
     (async () => {
       const rs = await fetch(
@@ -174,7 +145,6 @@ export default function Champion() {
       setChampionsDictionary(json.data);
     })();
   }, []);
-
   function shuffleKeys(obj) {
     const keys = Object.keys(obj);
     keys.sort(function (a, b) {
